@@ -1,0 +1,12 @@
+{
+	"name": "TTRPG Game Master Journal",
+	"description": "Basic configuration file for TTRPG GMs",
+	"commands": {
+		"-f": "fight",
+		"-t": "talk",
+		"-esc": "escape",
+		"-s": "steal",
+		"-b": "buy"
+	},
+	"customNote": true
+}

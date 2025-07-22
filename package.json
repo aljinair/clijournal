@@ -1,0 +1,21 @@
+{
+	"name": "clijournal",
+	"version": "0.0.1",
+	"description": "CLI Journal App for roleplaying ",
+	"license": "ISC",
+	"author": "aljinair",
+	"type": "module",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "test"
+	},
+	"keywords": [],
+	"dependencies": {
+		"@inquirer/prompts": "^7.7.1"
+	},
+	"devDependencies": {
+		"@types/node": "^24.1.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.8.3"
+	}
+}
