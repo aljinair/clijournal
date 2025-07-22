@@ -1,7 +1,11 @@
 import * as fs from 'fs';
 import os from 'os';
 import path from 'path';
-import { confirm } from '@inquirer/prompts';
+import { rawlist } from '@inquirer/prompts';
+
+function createConfigFile(answer: String) {
+	console.log(`You have selected ${answer}`);
+}
 
 export async function configChecker() {
 
@@ -9,13 +13,19 @@ export async function configChecker() {
 	const configPath = path.join(homeDir, ".config", "clijournal", "userconfig.json");
 	console.log(configPath);
 	if (!fs.existsSync(configPath)) {
-		const answer = await confirm({ message: "I couldn't find a config file, Do you want to create a default file?" });
-		if (!answer) {
-			console.log("Alright, just remember that the tool won't be able to add entries until you setup your commands");
-		}
+		const answer = await rawlist({
+			message: "It look like there is not a config file yet, choose a template to start from:",
+			choices: [
+				{ name: 'TTRPG Journal - General', value: 'ttrpg-general' },
+				{ name: 'TTRPG Journal - D&D', value: 'ttrpg-dnd' },
+				{ name: 'TTRPG Journal - Daggerheart', value: 'ttrpg-daggerheart' },
+			],
+		});
+		createConfigFile(answer);
 	} else {
-		console.log("Creating file...");
+		return;
 	}
+
 }
 
 configChecker()
