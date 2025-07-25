@@ -1,31 +1,21 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "node",
-		"types": [
-			"node"
-		],
-		"lib": [
-			"ESNext",
-			"DOM"
-		],
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"outDir": "./dist",
-		"rootDir": "./src",
-		"sourceMap": true
-	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx"
-	],
-	"exlude": [
-		"node_modules",
-		"**/*.spec.ts",
-		"**/*.test.ts",
-		".env"
-	]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": ["ESNext", "DOM"],
+    "esModuleInterop": true,
+	"allowImportingTsExtensions": true,
+	"noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "moduleDetection": "force"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", ".env"]
 }
