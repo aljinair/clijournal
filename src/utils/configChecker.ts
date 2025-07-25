@@ -3,7 +3,7 @@ import os from 'os';
 import path from 'path';
 import { rawlist } from '@inquirer/prompts';
 
-function createConfigFile(answer: String) {
+export function createConfigFile(answer: string) {
 	console.log(`You have selected ${answer}`);
 }
 
