@@ -1,6 +1,6 @@
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
+import { confirm } from '@inquirer/prompts';
 
 export class PathHandler {
 
@@ -19,6 +19,14 @@ export class PathHandler {
 		return fs.existsSync(this.absolutePath);
 	}
 
+	isFile(): boolean {
+		return this.exists() && fs.statSync(this.absolutePath).isFile();
+	}
+
+	isDirectory(): boolean {
+		return this.exists() && fs.statSync(this.absolutePath).isDirectory();
+	}
+
 	isEmpty(): boolean {
 		if (!this.exists()) return false;
 		const stat = fs.statSync(this.absolutePath);
@@ -28,15 +36,21 @@ export class PathHandler {
 	}
 
 	containsFile(fileName: string): boolean {
-		const targetPath = path.join(this.absolutePath, fileName);
-		if (!fs.existsSync(targetPath)) return false;
-		return fs.statSync(targetPath).isFile();
+		try {
+			const targetPath = path.join(this.absolutePath, fileName);
+			return fs.statSync(targetPath).isFile();
+		} catch {
+			return false;
+		}
 	}
 
 	containsDir(dirName: string): boolean {
-		const targetPath = path.join(this.absolutePath, dirName);
-		if (!fs.existsSync(targetPath)) return false;
-		return fs.statSync(targetPath).isDirectory();
+		try {
+			const targetPath = path.join(this.absolutePath, dirName);
+			return fs.statSync(targetPath).isDirectory();
+		} catch {
+			return false;
+		}
 	}
 
 	listContents(): string[] {
@@ -44,10 +58,35 @@ export class PathHandler {
 		return fs.readdirSync(this.absolutePath);
 	}
 
-	create(): void {
-		if (!this.exists()) {
-			fs.mkdirSync(this.absolutePath, { recursive: true });
+	async createFile(content = "", requestConfirm: boolean): Promise<boolean> {
+		if (this.exists()) return false;
+
+		if (requestConfirm) {
+			const answer = await confirm({
+				message: `Do you want to create the file "${this.name}" at path "${this.absolutePath}"`,
+				default: false,
+			})
+			if (!answer) return false;
 		}
+		fs.writeFileSync(this.absolutePath, content);
+		console.log(`File "${this.name}" created at ${this.absolutePath}`);
+		return true;
+	}
+
+	async createDir(requestConfirm: boolean): Promise<boolean> {
+		if (this.exists()) return false;
+
+		if (requestConfirm) {
+			const answer = await confirm({
+				message: `Do you want to create the directory "${this.name}" at path "${this.absolutePath}"`,
+				default: false,
+			})
+			if (!answer) return false;
+		}
+
+		fs.mkdirSync(this.absolutePath, { recursive: true });
+		console.log(`Directory "${this.name}" created at ${this.absolutePath}`);
+		return true;
 	}
 
 	delete(): void {

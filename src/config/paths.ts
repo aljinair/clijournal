@@ -9,4 +9,6 @@ export const Paths = {
 	clijournal: new PathHandler('clijournal', path.join(home, 'clijournal')),
 	journals: new PathHandler('journals', path.join(home, 'clijournal', 'journals')),
 
-}
+} as const;
+
+export type PathKey = keyof typeof Paths;
