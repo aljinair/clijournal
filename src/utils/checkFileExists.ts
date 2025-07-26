@@ -1,6 +1,5 @@
 import * as fs from 'fs';
-import os from 'os';
-import path from 'path';
+import Paths from '../config/paths.ts'
 
 export function checkFileExists(filePath: string): boolean {
 	const homeDir: string = os.homedir();
