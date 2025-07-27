@@ -1,4 +1,5 @@
-import { CommandList } from '../classes/CommandList.ts';
+/*
+ import { CommandList } from './CommandList.ts';
 
 export class ClijournalSession {
 
@@ -34,8 +35,9 @@ export class ClijournalSession {
 		this.journal = journal;
 	}
 
-	public setCommands(commands: object) {
+	public setCommands(commands: CommandList) {
 		this.commands = commands;
 	}
 
 }
+*/

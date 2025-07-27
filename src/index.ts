@@ -1,3 +1,5 @@
-import { appInit } from './appflow/appInit.ts';
+import { checkRootDir } from './appflow/checkRootDir.ts';
+import { checkJournals } from './appflow/checkJournals.ts';
 
-appInit();
+await checkRootDir();
+await checkJournals();

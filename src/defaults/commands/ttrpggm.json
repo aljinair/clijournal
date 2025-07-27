@@ -8,5 +8,10 @@
 		"-s": "steal",
 		"-b": "buy"
 	},
+	"entities": {
+		"pcs": {
+			"pty": "Party"
+		}
+	}
 	"customNote": true
 }
